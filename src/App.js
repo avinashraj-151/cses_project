@@ -8,7 +8,8 @@ import EditProfile from "./Component/Edit profile/EditProfile";
 import Pagenotfound from "./Pages/Pagenotfound";
 import { Blog } from "./Component/Blog/Blog";
 import SavedNote from "./Component/SavedNote/SavedNote";
-import Loginpage from "./Pages/loginpage";
+import Signup from "./Pages/Signup";
+import Signin from "./Component/Login/Signin";
 function App() {
   return (
     <>
@@ -22,9 +23,11 @@ function App() {
           <Route path="/profile/edit" element={<EditProfile />} />
           <Route path="/blog" element={<Blog></Blog>} />
           <Route path="/savednotes" element={<SavedNote></SavedNote>} />
-          <Route path="/login" element={<Loginpage />} />
+          <Route path="/login" element={<Signin />} />
+          <Route path="/sigup" element={<Signup />} />
           <Route path="*" element={<Pagenotfound />} />
         </Routes>
+        {/* <Signin /> */}
       </div>
     </>
   );

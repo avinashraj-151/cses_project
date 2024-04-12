@@ -1,8 +1,9 @@
-import { Box } from "@mui/material";
+import { Box, Skeleton, Avatar } from "@mui/material";
 import { abc } from "../../Data/Data.js";
 import SingleProblem from "./Singleproblem.jsx";
 import ShuffleIcon from "@mui/icons-material/Shuffle";
 import Leaderboard from "./Leaderboard.jsx";
+import { useState } from "react";
 const abc1 = [
   {
     id: 4,
@@ -29,6 +30,7 @@ const abc1 = [
 
 const result = [1, 2, 3, 4, 5, 6];
 function WProblem() {
+  const [loading, setloading] = useState(true);
   return (
     <>
       <div className="p-7 bg-[#1A1A1A] w-full h-full flex flex-row gap-5">
@@ -63,26 +65,79 @@ function WProblem() {
                 })}
               </Box>
             </Box>
-            <Box className="w-full h-full flex flex-row justify-between mt-8 mb-8">
-              <Box>
-                <Box className="bg-white p-2 rounded-2xl flex justify-center items-center">
-                  <h1 className="text-sm text-black text-center">
-                    ALL Problem
-                  </h1>
+            {!loading && (
+              <Box className="w-full h-full flex flex-row justify-between mt-8 mb-8">
+                <Box>
+                  <Box className="bg-white p-2 rounded-2xl flex justify-center items-center">
+                    <h1 className="text-sm text-black text-center">
+                      ALL Problem
+                    </h1>
+                  </Box>
+                </Box>
+                <Box className="flex flex-row gap-2 justify-center items-center">
+                  <button className="bg-[#46CE76] p-1 rounded-3xl flex justify-center items-center">
+                    <ShuffleIcon
+                      fontSize="medium"
+                      className="text-white text-center"
+                      onClick={handelpickone}
+                    />
+                  </button>
+                  <h4 className="text-white">Pick one</h4>
                 </Box>
               </Box>
-              <Box className="flex flex-row gap-2 justify-center items-center">
-                <button className="bg-[#46CE76] p-1 rounded-3xl flex justify-center items-center">
-                  <ShuffleIcon
-                    fontSize="medium"
-                    className="text-white text-center"
-                  />
-                </button>
-                <h4 className="text-white">Pick one</h4>
+            )}
+            {loading === true && (
+              <Box className="w-full h-full flex flex-col justify-between mt-4 mb-2">
+                <Skeleton
+                  animation="pulse"
+                  sx={{
+                    background: "linear-gradient(to right, #D65E64, #5E3D54)",
+                  }}
+                ></Skeleton>
+                <Skeleton
+                  animation="pulse"
+                  sx={{
+                    background: "linear-gradient(to right, #D65E64, #5E3D54)",
+                  }}
+                ></Skeleton>
+                <Skeleton
+                  animation="pulse"
+                  sx={{
+                    background: "linear-gradient(to right, #D65E64, #5E3D54)",
+                  }}
+                ></Skeleton>
+                <Skeleton
+                  animation="pulse"
+                  sx={{
+                    background: "linear-gradient(to right, #D65E64, #5E3D54)",
+                  }}
+                ></Skeleton>
+                <Skeleton
+                  animation="wave"
+                  variant="rounded"
+                  sx={{
+                    background: "linear-gradient(to right, #D65E64, #5E3D54)",
+                  }}
+                ></Skeleton>
+                <Skeleton
+                  animation="pulse"
+                  sx={{
+                    background: "linear-gradient(to right, #D65E64, #5E3D54)",
+                  }}
+                ></Skeleton>
+                <Skeleton
+                  animation="pulse"
+                  sx={{
+                    background: "linear-gradient(to right, #D65E64, #5E3D54)",
+                  }}
+                ></Skeleton>
               </Box>
-            </Box>
+            )}
             <Box className="">
-              <SingleProblem></SingleProblem>
+              <SingleProblem
+                loading={setloading}
+                handelpickone={handelpickone}
+              ></SingleProblem>
             </Box>
           </Box>
         </Box>

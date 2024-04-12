@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Box, Snackbar, Slide } from "@mui/material";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import CancelIcon from "@mui/icons-material/Cancel";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 const input_css =
   "bg-transparent border-[ #e0e0e0] border-2 outline-none p-2 w-full h-full rounded-lg text-white  hover:border-[#4D78A4] focus:shadow-md focus:shadow-[#FFAF38] transition-all duration-300 ";
 function Loginpage() {
@@ -120,8 +120,10 @@ function Loginpage() {
             </Box>
             <Box>
               <h1 className="text-white">
-                Already have an account?{" "}
-                <span className="text-[#FFAF38] cursor-pointer">Sign in</span>
+                Already have an account?
+                <span className="text-[#FFAF38] cursor-pointer ml-1">
+                  <Link to="/login">Sign in</Link>
+                </span>
               </h1>
             </Box>
           </form>
