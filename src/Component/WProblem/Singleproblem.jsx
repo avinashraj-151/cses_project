@@ -5,10 +5,10 @@ import axios from "axios";
 function SingleProblem({ loading, randomproblem }) {
   const [problems, setproblems] = useState([]);
   // const [loading, setloading] = useState(true);
-  const handlePickOne = () => {
-    const randomIndex = Math.floor(Math.random() * problems.length);
-    randomproblem(problems[randomIndex]);
-  };
+  // const handlePickOne = () => {
+  //   const randomIndex = Math.floor(Math.random() * problems.length);
+  //   randomproblem(problems[randomIndex]);
+  // };
   useEffect(() => {
     const fetch_data = async () => {
       try {
