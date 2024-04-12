@@ -79,7 +79,7 @@ function WProblem() {
                     <ShuffleIcon
                       fontSize="medium"
                       className="text-white text-center"
-                      onClick={handelpickone}
+                      // onClick={handelpickone}
                     />
                   </button>
                   <h4 className="text-white">Pick one</h4>
