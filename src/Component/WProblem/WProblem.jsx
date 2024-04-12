@@ -136,7 +136,7 @@ function WProblem() {
             <Box className="">
               <SingleProblem
                 loading={setloading}
-                handelpickone={handelpickone}
+                // handelpickone={handelpickone}
               ></SingleProblem>
             </Box>
           </Box>
