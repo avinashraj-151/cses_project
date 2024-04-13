@@ -98,7 +98,6 @@ const problems = [
   },
 ];
 function Allproblem() {
-  // console.log(openDialog1);
   return (
     <>
       <Box className="w-full h-full">

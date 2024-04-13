@@ -17,6 +17,10 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  page: {
+    type: Number,
+    default: 1, // Optional default value
+  },
 });
 const UserModel = mongoose.model("problemset", userSchema);
 

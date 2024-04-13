@@ -44,24 +44,24 @@ const ProblemComponent = ({ problem }) => {
           </Box>
           <Box className="w-[40%]">
             <Box className="flex flex-row justify-between justify-items-start text-center">
-              <Box>
+              <Box className="flex justify-center items-center justify-items-center">
                 {/* <h4>{}</h4> */}
                 <a href={problem.link} target="_blank">
                   <img src={logo} alt="logo" className="w-10 h-10"></img>
                 </a>
               </Box>
-              <Box>
+              <Box className="flex justify-center items-center justify-items-center">
                 <ArticleIcon></ArticleIcon>
               </Box>
-              <Box>
+              <Box className="flex justify-center items-center justify-items-center">
                 <YouTubeIcon className="text-[#FF0000]"></YouTubeIcon>
               </Box>
-              <Box>
+              <Box className="flex justify-center items-center justify-items-center">
                 <button onClick={() => openDialog1()}>
                   <AddBoxIcon></AddBoxIcon>
                 </button>
               </Box>
-              <Box>
+              <Box className="flex justify-center items-center justify-items-center">
                 <Checkbox
                   icon={
                     <StarBorderIcon className="text-white text-center"></StarBorderIcon>

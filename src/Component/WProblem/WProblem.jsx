@@ -1,4 +1,4 @@
-import { Box, Skeleton, Avatar } from "@mui/material";
+import { Box, Skeleton } from "@mui/material";
 import { abc } from "../../Data/Data.js";
 import SingleProblem from "./Singleproblem.jsx";
 import ShuffleIcon from "@mui/icons-material/Shuffle";
@@ -27,10 +27,22 @@ const abc1 = [
     tagline: "Dynamic Solutions: Code Empowerment Awaits!",
   },
 ];
-
 const result = [1, 2, 3, 4, 5, 6];
 function WProblem() {
   const [loading, setloading] = useState(true);
+  const [randomproblem, setrandomproblem] = useState("");
+  const [allproblem, setallproblem] = useState([]);
+  function handelpickone(problem) {
+    // console.log(problem);
+    setallproblem(problem);
+  }
+  // console.log(allproblem);
+  function chooseone() {
+    let random = Math.floor(Math.random() * allproblem.length);
+    console.log(allproblem[random].problem_link);
+    setrandomproblem(allproblem[random].problem_link);
+    // console.log(abc1);
+  }
   return (
     <>
       <div className="p-7 bg-[#1A1A1A] w-full h-full flex flex-row gap-5">
@@ -76,11 +88,18 @@ function WProblem() {
                 </Box>
                 <Box className="flex flex-row gap-2 justify-center items-center">
                   <button className="bg-[#46CE76] p-1 rounded-3xl flex justify-center items-center">
-                    <ShuffleIcon
-                      fontSize="medium"
-                      className="text-white text-center"
-                      // onClick={handelpickone}
-                    />
+                    <a
+                      href={randomproblem.length > 0 ? randomproblem : ""}
+                      target="_blank"
+                    >
+                      <ShuffleIcon
+                        fontSize="medium"
+                        className="text-white text-center"
+                        onClick={(event) => {
+                          chooseone();
+                        }}
+                      />
+                    </a>
                   </button>
                   <h4 className="text-white">Pick one</h4>
                 </Box>
@@ -136,7 +155,7 @@ function WProblem() {
             <Box className="">
               <SingleProblem
                 loading={setloading}
-                // handelpickone={handelpickone}
+                handelpickone={handelpickone}
               ></SingleProblem>
             </Box>
           </Box>
@@ -150,33 +169,3 @@ function WProblem() {
 }
 
 export default WProblem;
-
-{
-  /* <Box className="p-2 mt-2">
-  <Button
-                    variant="outlined"
-                    color="success"
-                    sx={{
-                      color: "white",
-                      backgroundColor: "transparent",
-                      "&:hover": {
-                        backgroundColor: "green",
-                      },
-                    }}
-                  >
-                    Try it free
-                  </Button> 
-   <button class="px-4 py-1 text-sm text-purple-600 font-semibold rounded-full border border-purple-200 hover:text-white hover:bg-purple-600 hover:border-transparent ">
-                        Solve Now
-                      </button> 
-                </Box> */
-}
-
-{
-  /* <Box className="w-full h-full bg-red-700 flex flex-row ">
-  <button className="bg-[#46CE76] flex p-1 rounded-full justify-center items-center">
-    <ShuffleIcon fontSize="small" className="text-white text-center" />
-  </button>
-  <h4 className="text-center text-[#46CE76] text-sm">Pick One</h4>
-</Box>; */
-}

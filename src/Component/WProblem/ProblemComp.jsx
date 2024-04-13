@@ -26,7 +26,7 @@ function ProblemComp({ problem }) {
         openDialog={OpenDialog}
         closeDialog={closeDialog1}
       ></Texteditor>
-      <Box key={problem.id} className="w-full h-full">
+      <Box key={problem._id} className="w-full h-full">
         <Box className="flex flex-row justify-between bg-[#1A1A1A] text-white  hover:bg-[#2A2A2A] transition-all duration-300 hover:cursor-pointer">
           <Box className="w-[8%] flex justify-start  items-center">
             <Checkbox
@@ -36,6 +36,9 @@ function ProblemComp({ problem }) {
               checkedIcon={
                 <TaskAltIcon className="text-[#3FCA7D] text-center"></TaskAltIcon>
               }
+              onClick={() => {
+                // console.log(problem);
+              }}
             />
           </Box>
           <Box className="w-[50%] justify-items-start flex items-center ">

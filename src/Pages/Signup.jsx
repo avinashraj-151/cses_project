@@ -17,15 +17,20 @@ function Loginpage() {
   const [opensnack, setopensnack] = useState(false);
   const [snackmessage, setsnackmessage] = useState("");
   function handelchange(event) {
-    console.log(event.target.name);
+    // console.log(event.target.name);
     Setuserdetails({
       ...Userdetails,
       [event.target.name]: event.target.value,
     });
   }
   const validation = function () {
-    if (Userdetails.password !== Userdetails.confirmpassword) {
-      setsnackmessage("Passwords do not match");
+    if (Userdetails.username.length < 5) {
+      setsnackmessage("Username must be atleast 4 characters long");
+      setopensnack(true);
+      return false;
+    }
+    if (Userdetails.username.length > 15) {
+      setsnackmessage("Username must not be more than 15 characters long");
       setopensnack(true);
       return false;
     }
@@ -39,13 +44,8 @@ function Loginpage() {
       setopensnack(true);
       return false;
     }
-    if (Userdetails.username.length < 5) {
-      setsnackmessage("Username must be atleast 4 characters long");
-      setopensnack(true);
-      return false;
-    }
-    if (Userdetails.username.length > 15) {
-      setsnackmessage("Username must not be more than 15 characters long");
+    if (Userdetails.password !== Userdetails.confirmpassword) {
+      setsnackmessage("Passwords do not match");
       setopensnack(true);
       return false;
     }

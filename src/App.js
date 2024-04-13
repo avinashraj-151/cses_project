@@ -15,7 +15,7 @@ function App() {
     <>
       <div className="flex h-screen w-screen flex-1">
         <Sidebar></Sidebar>
-        <Routes>
+        {/* <Routes>
           <Route path="/" element={<Homepage />} />
           <Route path="/problems" element={<Problems />} />
           <Route path="/problem" element={<SingleProblem />} />
@@ -26,7 +26,8 @@ function App() {
           <Route path="/login" element={<Signin />} />
           <Route path="/sigup" element={<Signup />} />
           <Route path="*" element={<Pagenotfound />} />
-        </Routes>
+        </Routes> */}
+        <SingleProblem />
         {/*  */}
       </div>
     </>
