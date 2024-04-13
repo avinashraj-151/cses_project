@@ -1,8 +1,9 @@
-import React from "react";
-import { Box, Avatar, Typography, Divider } from "@mui/material";
+import React, { useContext } from "react";
+import { Box, Avatar, Typography } from "@mui/material";
 import profile from "../../assert/perfect.png";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { Link } from "react-router-dom";
+import { Context } from "../../Contextapi/Contextapi";
 const information = [
   {
     id: 1,
@@ -26,6 +27,7 @@ const information = [
   },
 ];
 function UserDetails({ clicked, selected }) {
+  const { username } = useContext(Context);
   return (
     <Box className="w-72 bg-[#282828] h-full flex flex-col">
       <Box className="p-1 rounded-lg">
@@ -49,12 +51,12 @@ function UserDetails({ clicked, selected }) {
         <Box>
           <Box className="text-center p-4">
             {/* name */}
-            <Typography va variant="h4" className="text-white">
-              AvinashRaj
+            <Typography va variant="h5" className="text-white">
+              {username}
             </Typography>
             {/* username */}
             <Typography className="text-sm text-gray-200">
-              #AvianashRaj
+              user_real_name
             </Typography>
           </Box>
         </Box>

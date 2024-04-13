@@ -3,6 +3,7 @@ import { Box, Snackbar, Slide } from "@mui/material";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import CancelIcon from "@mui/icons-material/Cancel";
 import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
 const input_css =
   "bg-transparent border-[ #e0e0e0] border-2 outline-none p-2 w-full h-full rounded-lg text-white  hover:border-[#4D78A4] focus:shadow-md focus:shadow-[#FFAF38] transition-all duration-300 ";
 function SignPage() {
@@ -15,22 +16,59 @@ function SignPage() {
   const [opensnack, setopensnack] = useState(false);
   const [snackmessage, setsnackmessage] = useState("");
   function handelchange(event) {
-    console.log(event.target.name);
+    // console.log(event.target.name);
     Setuserdetails({
       ...Userdetails,
       [event.target.name]: event.target.value,
     });
   }
   const validation = function () {
+    // return true;
+    if (Userdetails.email.trim() === "") {
+      setopensnack(true);
+      setsnackmessage("Please fill email field");
+      return false;
+    }
+    if (Userdetails.password.trim() === "") {
+      setopensnack(true);
+      setsnackmessage("Please fill password field");
+      return false;
+    }
     return true;
   };
   function handelsubmit(event) {
     event.preventDefault();
-    validation();
-    console.log("submit");
     if (validation()) {
-      navigate("/");
+      // console.log("checking data base");
+      const check = async () => {
+        // const response= await axios.post("")
+        const response = await axios.post(`http://localhost:4000/auth/login`, {
+          email: Userdetails.email,
+          password: Userdetails.password,
+        });
+        // console.log(response);
+        var message = response.data.message;
+        if (message == "Invalid Email") {
+          setopensnack(true);
+          setsnackmessage(message);
+        } else if (message == "Invalid Password") {
+          setopensnack(true);
+          setsnackmessage(message);
+        } else {
+          // console.log(message);
+          localStorage.setItem(
+            "userdetails",
+            JSON.stringify({
+              username: message.username,
+              email: message.email,
+            })
+          );
+          navigate("/profile");
+        }
+      };
+      check();
     }
+    // console.log("submit");
   }
   return (
     <div className="w-full h-full bg-[#1A1A1A] p-7 ">

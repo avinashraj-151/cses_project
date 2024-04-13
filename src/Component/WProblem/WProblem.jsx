@@ -4,6 +4,7 @@ import SingleProblem from "./Singleproblem.jsx";
 import ShuffleIcon from "@mui/icons-material/Shuffle";
 import Leaderboard from "./Leaderboard.jsx";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 const abc1 = [
   {
     id: 4,
@@ -11,6 +12,7 @@ const abc1 = [
     description: "Conquer Graphs: Navigate Complex Networks with Ease!",
     cover: abc[3].cover,
     tagline: "Navigate Networks: Graph Mastery Unleashed!",
+    link: "/single/Graph Algorithms",
   },
   {
     id: 6,
@@ -18,6 +20,7 @@ const abc1 = [
     description: "Unlock Trees: Traverse Data Structures Seamlessly!",
     cover: abc[5].cover,
     tagline: "sameless Traversal: Unlock Tree Algorithm Mastery!",
+    link: "/single/Tree Algorithms",
   },
   {
     id: 3,
@@ -25,9 +28,9 @@ const abc1 = [
     description: "Empower Your Code: Dynamic Programming Solutions Await!",
     cover: abc[2].cover,
     tagline: "Dynamic Solutions: Code Empowerment Awaits!",
+    link: "/single/Advanced Techniques",
   },
 ];
-const result = [1, 2, 3, 4, 5, 6];
 function WProblem() {
   const [loading, setloading] = useState(true);
   const [randomproblem, setrandomproblem] = useState("");
@@ -56,22 +59,24 @@ function WProblem() {
                 {abc1.map((item, index) => {
                   return (
                     <Box key={index}>
-                      <Box className="shadow-inner rounded-xl bg-[#282828] flex flex-row gap-3 hover:bg-[#363636]  items-center cursor-pointer">
-                        <Box>
-                          <img
-                            src={item.cover}
-                            alt="cover"
-                            className="w-16 rounded-lg hover:animate-pulse cursor-pointer p-3"
-                          ></img>
-                        </Box>
-                        <Box>
-                          <Box className="flex justify-center items-start justify-items-start">
-                            <h6 className="text-sm text-white ">
-                              {item.title}
-                            </h6>
+                      <Link to={item.link}>
+                        <Box className="shadow-inner rounded-xl bg-[#282828] flex flex-row gap-3 hover:bg-[#363636]  items-center cursor-pointer">
+                          <Box>
+                            <img
+                              src={item.cover}
+                              alt="cover"
+                              className="w-16 rounded-lg hover:animate-pulse cursor-pointer p-3"
+                            ></img>
+                          </Box>
+                          <Box>
+                            <Box className="flex justify-center items-start justify-items-start">
+                              <h6 className="text-sm text-white ">
+                                {item.title}
+                              </h6>
+                            </Box>
                           </Box>
                         </Box>
-                      </Box>
+                      </Link>
                     </Box>
                   );
                 })}

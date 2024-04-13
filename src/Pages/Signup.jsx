@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { Box, Snackbar, Slide } from "@mui/material";
-import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import CancelIcon from "@mui/icons-material/Cancel";
 import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
 const input_css =
   "bg-transparent border-[ #e0e0e0] border-2 outline-none p-2 w-full h-full rounded-lg text-white  hover:border-[#4D78A4] focus:shadow-md focus:shadow-[#FFAF38] transition-all duration-300 ";
 function Loginpage() {
@@ -24,27 +24,40 @@ function Loginpage() {
     });
   }
   const validation = function () {
+    Userdetails.username = Userdetails.username.trim();
     if (Userdetails.username.length < 5) {
-      setsnackmessage("Username must be atleast 4 characters long");
+      if (Userdetails.username.length == 0) {
+        setsnackmessage("Password cannot be empty");
+        setopensnack(true);
+        return false;
+      } else {
+        setsnackmessage("Username must be atleast 5 characters long");
+        setopensnack(true);
+        return false;
+      }
+    } else if (Userdetails.email.trim().length == 0) {
+      setsnackmessage("email cannot be empty");
       setopensnack(true);
       return false;
-    }
-    if (Userdetails.username.length > 15) {
+    } else if (Userdetails.username.length > 15) {
       setsnackmessage("Username must not be more than 15 characters long");
       setopensnack(true);
       return false;
-    }
-    if (Userdetails.password.length < 8) {
-      setsnackmessage("Password must be at least 8 characters");
-      setopensnack(true);
-      return false;
-    }
-    if (Userdetails.password.length > 15) {
+    } else if (Userdetails.password.length < 8) {
+      if (Userdetails.password.length == 0) {
+        setsnackmessage("Password cannot be empty");
+        setopensnack(true);
+        return false;
+      } else {
+        setsnackmessage("Password must be at least 8 characters");
+        setopensnack(true);
+        return false;
+      }
+    } else if (Userdetails.password.length > 15) {
       setsnackmessage("Password must not be more than 15 characters long");
       setopensnack(true);
       return false;
-    }
-    if (Userdetails.password !== Userdetails.confirmpassword) {
+    } else if (Userdetails.password !== Userdetails.confirmpassword) {
       setsnackmessage("Passwords do not match");
       setopensnack(true);
       return false;
@@ -53,10 +66,77 @@ function Loginpage() {
   };
   function handelsubmit(event) {
     event.preventDefault();
-    validation();
-    console.log("submit");
     if (validation()) {
-      navigate("/");
+      // console.log("submit");
+      const checkuser = async () => {
+        const usernamecheck = await axios.get(
+          `http://localhost:4000/auth/signup/checkusername/${Userdetails.username}`
+        );
+        // console.log(usernamecheck.data.message);
+        var usermessage = usernamecheck.data.message;
+        if (usermessage) {
+          if (usermessage == "User name already exist") {
+            setsnackmessage(usermessage);
+            setopensnack(true);
+            return false;
+          } else {
+            return true;
+          }
+        }
+      };
+      const emailcheck = async () => {
+        const emailcheck = await axios.get(
+          `http://localhost:4000/auth/signup/checkemail/${Userdetails.email}`
+        );
+        var emailmessage = emailcheck.data.message;
+        if (emailmessage) {
+          if (emailmessage == "User email already exist") {
+            setsnackmessage(emailmessage);
+            setopensnack(true);
+            return false;
+          } else {
+            return true;
+          }
+        }
+      };
+      const finallycheck = async () => {
+        const usercheck = await checkuser();
+        if (usercheck) {
+          const emailcheck1 = await emailcheck();
+          if (emailcheck1) {
+            // console.log("singup time baby");
+            const signup = async () => {
+              const response = await axios.post(
+                `http://localhost:4000/auth/signup`,
+                {
+                  username: Userdetails.username,
+                  email: Userdetails.email,
+                  password: Userdetails.password,
+                }
+              );
+              if (response) {
+                localStorage.setItem(
+                  "userdetails",
+                  JSON.stringify({
+                    username: Userdetails.username,
+                    email: Userdetails.email,
+                  })
+                );
+                Setuserdetails({
+                  email: "",
+                  password: "",
+                  confirmpassword: "",
+                  username: "",
+                });
+                navigate("/profile");
+              }
+            };
+            signup();
+          }
+        }
+        // console.log(usercheck)
+      };
+      finallycheck();
     }
   }
   return (

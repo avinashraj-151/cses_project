@@ -16,6 +16,7 @@ export const abc = [
     description: "Discover Basic Algorithms: Introductory Problems",
     cover: intro,
     tagline: " Discover Basic Algorithms: Introductory Problems",
+    link: "/single/Introductory Problems",
   },
   {
     id: 2,
@@ -23,6 +24,7 @@ export const abc = [
     description: "Master Sorting and Searching: Efficiency Unleashed!",
     cover: search,
     tagline: "Efficiency Unleashed: Sort, Search Mastery!",
+    link: "/single/Sorting and Searching",
   },
   {
     id: 3,
@@ -30,6 +32,7 @@ export const abc = [
     description: "Empower Your Code: Dynamic Programming Solutions Await!",
     cover: dp,
     tagline: "Dynamic Solutions: Code Empowerment Awaits!",
+    link: "/single/Dynamic Programming",
   },
   {
     id: 4,
@@ -37,6 +40,7 @@ export const abc = [
     description: "Conquer Graphs: Navigate Complex Networks with Ease!",
     cover: graph,
     tagline: "Navigate Networks: Graph Mastery Unleashed!",
+    link: "/single/Graph Algorithms",
   },
   {
     id: 5,
@@ -44,6 +48,7 @@ export const abc = [
     description: "Optimize Queries: Range Problems, Solved!",
     cover: range,
     tagline: "Range Problems Solved: Optimize Your Queries!",
+    link: "/single/Range Queries",
   },
   {
     id: 6,
@@ -51,6 +56,7 @@ export const abc = [
     description: "Unlock Trees: Traverse Data Structures Seamlessly!",
     cover: tree,
     tagline: "sameless Traversal: Unlock Tree Algorithm Mastery!",
+    link: "/single/Tree Algorithms",
   },
   {
     id: 7,
@@ -58,6 +64,7 @@ export const abc = [
     description: "Mathematics Made Simple: Explore Numerical Solutions!",
     cover: math,
     tagline: "Solve Numerical Puzzles: Mathematics Simplified!",
+    link: "/single/Mathematics",
   },
   {
     id: 8,
@@ -65,6 +72,7 @@ export const abc = [
     description: "String Mastery: Decode Patterns with Precision!",
     cover: string,
     tagline: "Pattern Decoding: Master String Algorithm",
+    link: "/single/String Algorithms",
   },
   {
     id: 9,
@@ -72,6 +80,7 @@ export const abc = [
     description: "Shape Your Solutions: Geometry Challenges Aplenty!",
     cover: gemo,
     tagline: "Geometric Challenge: Shape Your Solutions!",
+    link: "/single/Geometry",
   },
   {
     id: 10,
@@ -79,6 +88,7 @@ export const abc = [
     description: "Advanced Techniques: Elevate Your Programming Skills!",
     cover: adv,
     tagline: "Elevate Your Skills: Advanced Techniques Await!",
+    link: "/single/Advanced Techniques",
   },
   {
     id: 11,
@@ -86,6 +96,7 @@ export const abc = [
     description: "Dive Deeper: Additional Problems Await!",
     cover: addition,
     tagline: "Explore Deeper: Additional Challenges Await!",
+    link: "/single/Additional Problems",
   },
 ];
 export var formats = [

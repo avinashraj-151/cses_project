@@ -3,7 +3,7 @@ import { Box, Typography } from "@mui/material";
 import problemimage from "../../assert/intro3.png";
 import LinearProgress from "@mui/material/LinearProgress";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-function Header() {
+function Header({ problemset_name }) {
   return (
     <Box>
       <Box className="flex justify-center items-center flex-row">
@@ -18,7 +18,7 @@ function Header() {
             <Box>
               <Box>
                 <h1 className="text-white text-4xl capitalize font-bold">
-                  Introductory Problems
+                  {problemset_name}
                 </h1>
               </Box>
               <Box className="p-2 mt-8 flex flex-row justify-center">

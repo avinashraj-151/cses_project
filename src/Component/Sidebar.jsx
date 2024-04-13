@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import logo from "../assert/logo.png";
 import HomeIcon from "@mui/icons-material/Home";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
@@ -11,6 +11,7 @@ import profile from "../assert/perfect.png";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { Link, useLocation } from "react-router-dom";
 import { Client } from "../Server/Connectdb/Connectdb.js";
+import { Context } from "../Contextapi/Contextapi.jsx";
 const Menu_detail = [
   {
     title: "Home",
@@ -45,7 +46,8 @@ const Menu_detail = [
 ];
 function Sidebar() {
   const [open, setopen] = useState(false);
-  const [Selected, setSelected] = useState(0);
+  // const [Selected, setSelected] = useState(0);
+  const { sidebarpage, username } = useContext(Context);
   return (
     <div className="flex ">
       <div className="bg-[#282828] h-screen flex justify-between flex-col">
@@ -81,16 +83,14 @@ function Sidebar() {
                 <Link to={item.link} key={index}>
                   <div
                     className={`text-gray-300 text-balance flex gap-x-4 p-2 items-center  justify-items-center justify-self-center rounded-md cursor-pointer mt-2  ${
-                      Selected === index ? "bg-[#E25C5A]" : "hover:bg-zinc-700 "
+                      sidebarpage === index
+                        ? "bg-[#E25C5A]"
+                        : "hover:bg-zinc-700 "
                     }`}
-                    onClick={() => {
-                      // console.log(index);
-                      setSelected(index);
-                    }}
                   >
                     <span
                       className={`text-center px-2 ${
-                        Selected === index ? "animate-pulse" : " "
+                        sidebarpage === index ? "animate-pulse" : " "
                       }`}
                     >
                       {item.icon}
@@ -117,7 +117,7 @@ function Sidebar() {
               open === true ? "hidden" : ""
             }`}
           >
-            AvinashRaj
+            {username}
           </Typography>
         </div>
       </div>

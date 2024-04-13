@@ -1,6 +1,7 @@
 import React from "react";
 import { Box, Button } from "@mui/material";
 import { abc } from "../../Data/Data.js";
+import { Link } from "react-router-dom";
 function Card() {
   return (
     <Box className="w-full h-full  p-5">
@@ -35,9 +36,11 @@ function Card() {
                   >
                     Try it free
                   </Button> */}
-                    <button class="px-4 py-1 text-sm text-purple-600 font-semibold rounded-full border border-purple-200 hover:text-white hover:bg-purple-600 hover:border-transparent ">
-                      Solve Now
-                    </button>
+                    <Link to={item.link}>
+                      <button class="px-4 py-1 text-sm text-purple-600 font-semibold rounded-full border border-purple-200 hover:text-white hover:bg-purple-600 hover:border-transparent ">
+                        Solve Now
+                      </button>
+                    </Link>
                   </Box>
                 </Box>
               </Box>

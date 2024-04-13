@@ -15,12 +15,19 @@ Route.get("/all", async (req, res, next) => {
   }
 });
 
-Route.get("/:name", async (req, res, next) => {
-  const { name } = req.params;
+Route.get("/:page", async (req, res, next) => {
+  const { page } = req.params;
   // console.log(name);
   // const data = await Problemset.find({ page: 1});
-  const data = await Problemset.find({ page: name });
+  const data = await Problemset.find({ page: page });
   // console.log(data);
+  res.json(data);
+});
+Route.get("/singleproblem/:name", async (req, res, next) => {
+  const { name } = req.params;
+  // console.log(name);
+  const data = await Problemset.find({ problem_section: name });
+  // // console.log(data);
   res.json(data);
 });
 export default Route;

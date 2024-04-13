@@ -3,7 +3,8 @@ import { Box } from "@mui/material";
 import Allproblem from "./Allproblem";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { Link } from "react-router-dom";
-function Probleset() {
+function Probleset({ problemset_name }) {
+  // console.log(problemset_name);
   return (
     <>
       <Box className="p-7 bg-[#1A1A1A] w-full h-full flex flex-col gap-6 overflow-auto scrollbar-thin">
@@ -17,8 +18,8 @@ function Probleset() {
             </button>
           </Link>
         </Box>
-        <Header></Header>
-        <Allproblem></Allproblem>
+        <Header problemset_name={problemset_name}></Header>
+        <Allproblem problemset_name={problemset_name}></Allproblem>
       </Box>
     </>
   );

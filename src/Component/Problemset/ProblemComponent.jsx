@@ -38,15 +38,15 @@ const ProblemComponent = ({ problem }) => {
             />
           </Box>
           <Box className="w-[50%] justify-items-start flex items-center ">
-            <a href={problem.link} target="_blank">
-              <h4>{problem.problemName}</h4>
+            <a href={problem.problem_link} target="_blank">
+              <h4>{problem.problem_name}</h4>
             </a>
           </Box>
           <Box className="w-[40%]">
             <Box className="flex flex-row justify-between justify-items-start text-center">
               <Box className="flex justify-center items-center justify-items-center">
                 {/* <h4>{}</h4> */}
-                <a href={problem.link} target="_blank">
+                <a href={problem.problem_link} target="_blank">
                   <img src={logo} alt="logo" className="w-10 h-10"></img>
                 </a>
               </Box>
