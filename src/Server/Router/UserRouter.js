@@ -70,4 +70,63 @@ Route.post("/login", async (req, res, next) => {
     next(error);
   }
 });
+
+Route.post("/personal/:username", async (req, res, next) => {
+  try {
+    const { username } = req.params;
+    // console.log(username);
+    const user = req.body;
+    // console.log(user);
+    const user_country = await User.updateOne(
+      {
+        username: username,
+      },
+      {
+        $set: {
+          Country_Name: user.Country_Name,
+        },
+      }
+    );
+    // console.log(user_country);
+    const user_College = await User.updateOne(
+      { username: username },
+      {
+        $set: {
+          College: user.College,
+        },
+      }
+    );
+    // console.log(user_College);
+    res.json({ message: "Success updated" });
+  } catch (error) {
+    console.log(error);
+    next(error);
+  }
+});
+
+Route.get("/personalinfo/:username", async (req, res, next) => {
+  try {
+    const { username } = req.params;
+    // console.log(username);
+    // console.log(req.body);
+    const userinfo = await User.findOne({
+      username: username,
+    });
+    // console.log(userinfo);
+    res.json({ message: userinfo });
+  } catch (error) {
+    next(error);
+  }
+});
+Route.post("/SocialInfo/:username", async (req, res, next) => {
+  try {
+    const { username } = req.params;
+    // console.log(username);
+    console.log(req.body);
+
+    res.json({ message: userinfo });
+  } catch (error) {
+    next(error);
+  }
+});
 export default Route;

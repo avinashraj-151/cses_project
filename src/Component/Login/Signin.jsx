@@ -1,20 +1,26 @@
-import React, { useState } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { Box, Snackbar, Slide } from "@mui/material";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import CancelIcon from "@mui/icons-material/Cancel";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { Context } from "../../Contextapi/Contextapi";
 const input_css =
   "bg-transparent border-[ #e0e0e0] border-2 outline-none p-2 w-full h-full rounded-lg text-white  hover:border-[#4D78A4] focus:shadow-md focus:shadow-[#FFAF38] transition-all duration-300 ";
+
 function SignPage() {
   const [Userdetails, Setuserdetails] = useState({
     email: "",
     password: "",
   });
   const navigate = useNavigate();
-
   const [opensnack, setopensnack] = useState(false);
   const [snackmessage, setsnackmessage] = useState("");
+  const { setlogin, setprofile1, setsidebarpage, setusername } =
+    useContext(Context);
+  useEffect(() => {
+    setsidebarpage(5);
+  });
   function handelchange(event) {
     // console.log(event.target.name);
     Setuserdetails({
@@ -63,6 +69,9 @@ function SignPage() {
               email: message.email,
             })
           );
+          setlogin(true);
+          setprofile1(true);
+          setusername(message.username);
           navigate("/profile");
         }
       };

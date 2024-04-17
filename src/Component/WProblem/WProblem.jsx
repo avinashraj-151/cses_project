@@ -3,8 +3,9 @@ import { abc } from "../../Data/Data.js";
 import SingleProblem from "./Singleproblem.jsx";
 import ShuffleIcon from "@mui/icons-material/Shuffle";
 import Leaderboard from "./Leaderboard.jsx";
-import { useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { Link } from "react-router-dom";
+import { Context } from "../../Contextapi/Contextapi.jsx";
 const abc1 = [
   {
     id: 4,
@@ -34,11 +35,15 @@ const abc1 = [
 function WProblem() {
   const [loading, setloading] = useState(true);
   const [randomproblem, setrandomproblem] = useState("");
+  const { setsidebarpage } = useContext(Context);
   const [allproblem, setallproblem] = useState([]);
   function handelpickone(problem) {
     // console.log(problem);
     setallproblem(problem);
   }
+  useEffect(() => {
+    setsidebarpage(2);
+  }, []);
   // console.log(allproblem);
   function chooseone() {
     let random = Math.floor(Math.random() * allproblem.length);

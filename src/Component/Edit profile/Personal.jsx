@@ -1,7 +1,8 @@
 import { Box, Divider, Snackbar, Slide } from "@mui/material";
 import { collegedata, countrydata } from "../../Data/College.js";
-import { useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
+import axios from "axios";
 function Personal() {
   const [personaldetails, setpersonaldetails] = useState({
     email: "",
@@ -10,20 +11,44 @@ function Personal() {
   });
   const [opensnack, setopensnack] = useState(false);
   const [snackmessage, setsnackmessage] = useState("");
+  const [disabled, setdisabled] = useState(true);
+
+  useEffect(() => {
+    const fetchdata = async () => {
+      const response = await axios.get(
+        `http://localhost:4000/auth/personalinfo/avinashraj151`
+      );
+      // console.log(response.data.message.Country_Name);
+      // console.log(response.data.message.College);
+      setpersonaldetails({
+        email: response.data.message.email,
+        Country_Name: response.data.message.Country_Name,
+        College: response.data.message.College,
+      });
+    };
+    fetchdata();
+  }, []);
   function handelPersonalinfo(e) {
     e.preventDefault();
-    setopensnack(true);
-    setsnackmessage("Personal info updated");
-    // console.log("kam kar raha");
+    // console.log(personaldetails);
+    const fetchPersonaldetails = async () => {
+      const response = await axios.post(
+        `http://localhost:4000/auth/personal/avinashraj151`,
+        personaldetails
+      );
+      if (response.data.message === "Success updated") {
+        setopensnack(true);
+        setsnackmessage("Personal info updated");
+      }
+    };
+    fetchPersonaldetails();
   }
   function handelchange(e) {
-    // console.log(e.target.name);
-    // console.log(e.target.value);
     setpersonaldetails({
       ...personaldetails,
       [e.target.name]: e.target.value,
     });
-    // console.log(personaldetails);
+    setdisabled(false);
   }
   return (
     <div>
@@ -51,6 +76,7 @@ function Personal() {
               name="Country_Name"
               className="outline-none focus:border-green-500 focus:border-b-4 duration-300 bg-white rounded-lg text-sm px-5 py-2 w-96 transition-all "
               onChange={handelchange}
+              value={personaldetails.Country_Name}
             >
               {/* <option value="">Choose your College</option> */}
               {/* Choose your country */}
@@ -73,6 +99,7 @@ function Personal() {
               name="College"
               className="outline-none focus:border-green-500 focus:border-b-4 duration-300 bg-white rounded-lg text-sm px-5 py-2 w-96 transition-all "
               onChange={handelchange}
+              value={personaldetails.College}
             >
               {/* <option value="">Choose your College</option> */}
               <option value="Choose your college">Choose your college</option>
@@ -91,6 +118,7 @@ function Personal() {
             <button
               type="submit"
               className="bg-yellow-300 px-6 py-2 rounded-xl text-center text-pretty hover:bg-[#FFA116] text-black"
+              disabled={disabled}
             >
               Save
             </button>
@@ -99,7 +127,7 @@ function Personal() {
       </Box>
       <Snackbar
         open={opensnack}
-        autoHideDuration={2000}
+        autoHideDuration={1000}
         onClose={() => setopensnack(false)}
         anchorOrigin={{ vertical: "top", horizontal: "center" }}
         TransitionComponent={Slide}

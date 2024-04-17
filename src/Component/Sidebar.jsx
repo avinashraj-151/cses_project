@@ -1,4 +1,4 @@
-import { useEffect, useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import logo from "../assert/logo.png";
 import HomeIcon from "@mui/icons-material/Home";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
@@ -9,9 +9,9 @@ import CardTravelOutlinedIcon from "@mui/icons-material/CardTravelOutlined";
 import { Avatar, Typography } from "@mui/material";
 import profile from "../assert/perfect.png";
 import LogoutIcon from "@mui/icons-material/Logout";
-import { Link, useLocation } from "react-router-dom";
-import { Client } from "../Server/Connectdb/Connectdb.js";
+import { Link } from "react-router-dom";
 import { Context } from "../Contextapi/Contextapi.jsx";
+import { Login } from "@mui/icons-material";
 const Menu_detail = [
   {
     title: "Home",
@@ -38,16 +38,22 @@ const Menu_detail = [
     icon: <BookOutlinedIcon />,
     link: "/savednotes",
   },
-  {
-    title: "Login",
-    icon: <LogoutIcon />,
-    link: "/login",
-  },
+  // {
+  //   title: "Login",
+  //   icon: <LogoutIcon />,
+  //   link: "/login",
+  // },
 ];
 function Sidebar() {
   const [open, setopen] = useState(false);
   // const [Selected, setSelected] = useState(0);
-  const { sidebarpage, username } = useContext(Context);
+  const { sidebarpage, username, login, profile1, setusername } =
+    useContext(Context);
+  function handellogout() {
+    localStorage.removeItem("userdetails");
+    // setprofile1(false);
+    setusername("username");
+  }
   return (
     <div className="flex ">
       <div className="bg-[#282828] h-screen flex justify-between flex-col">
@@ -104,22 +110,68 @@ function Sidebar() {
                 </Link>
               );
             })}
+            {username != "username" ? (
+              <div
+                className={`text-gray-300 text-balance flex gap-x-4 p-2 items-center  justify-items-center justify-self-center rounded-md cursor-pointer mt-2  ${
+                  sidebarpage === 6 ? "bg-[#E25C5A]" : "hover:bg-zinc-700 "
+                }`}
+                onClick={handellogout}
+              >
+                <span
+                  className={`text-center px-2 ${
+                    sidebarpage === 6 ? "animate-pulse" : " "
+                  }`}
+                >
+                  <LogoutIcon></LogoutIcon>
+                </span>
+                <span
+                  className={`font-medium ${open === true ? "hidden" : ""}`}
+                >
+                  {/* {item.title} */}
+                  Logout
+                </span>
+              </div>
+            ) : (
+              <Link to={"/login"}>
+                <div
+                  className={`text-gray-300 text-balance flex gap-x-4 p-2 items-center  justify-items-center justify-self-center rounded-md cursor-pointer mt-2  ${
+                    sidebarpage === 5 ? "bg-[#E25C5A]" : "hover:bg-zinc-700 "
+                  }`}
+                >
+                  <span
+                    className={`text-center px-2 ${
+                      sidebarpage === 5 ? "animate-pulse" : " "
+                    }`}
+                  >
+                    <Login></Login>
+                  </span>
+                  <span
+                    className={`font-medium ${open === true ? "hidden" : ""}`}
+                  >
+                    {/* {item.title} */}
+                    Login
+                  </span>
+                </div>
+              </Link>
+            )}
           </div>
         </div>
-        <div className="text-yellow-400 p-5  gap-x-3 flex items-center text-center">
-          <Avatar
-            src={profile}
-            sx={{ width: 56, height: 56 }}
-            className="border-yellow-500 border-2 cursor-pointer hover:border-white"
-          ></Avatar>
-          <Typography
-            className={`font-medium text-center flex items-center justify-center ${
-              open === true ? "hidden" : ""
-            }`}
-          >
-            {username}
-          </Typography>
-        </div>
+        {username != "username" && (
+          <div className="text-yellow-400 p-5  gap-x-3 flex items-center text-center">
+            <Avatar
+              src={profile}
+              sx={{ width: 56, height: 56 }}
+              className="border-yellow-500 border-2 cursor-pointer hover:border-white"
+            ></Avatar>
+            <Typography
+              className={`font-medium text-center flex items-center justify-center ${
+                open === true ? "hidden" : ""
+              }`}
+            >
+              {username}
+            </Typography>
+          </div>
+        )}
       </div>
     </div>
   );

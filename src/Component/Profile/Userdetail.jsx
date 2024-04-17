@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from "react";
+import React, { useEffect, useContext, useState } from "react";
 import { Box, Avatar, Typography, Divider } from "@mui/material";
 import profile from "../../assert/perfect.png";
 import GitHubIcon from "@mui/icons-material/GitHub";
@@ -11,13 +11,63 @@ import LocationCityIcon from "@mui/icons-material/LocationCity";
 import { Edit } from "@mui/icons-material";
 import { Link } from "react-router-dom";
 import { Context } from "../../Contextapi/Contextapi";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 function Userdetail() {
   const { username, setusername, setsidebarpage } = useContext(Context);
+  const [userdetails, setuserdetails] = useState({
+    email: "...",
+    Country_Name: "...",
+    College: "...",
+  });
+  const navigate = useNavigate();
+
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem("userdetails"));
-    setusername(user.username);
+    // setusername(user.username);
+    if (user != null) {
+      const fetchdata = async () => {
+        const response = await axios.get(
+          `http://localhost:4000/auth/personalinfo/${user.username}`
+        );
+        if (response) {
+          setuserdetails({
+            email: response.data.message.email,
+            Country_Name: response.data.message.Country_Name,
+            College: response.data.message.College,
+          });
+          setusername(user.username);
+        }
+        // console.log(response.data.message);
+        // console.log(response.data.message);
+        // console.log(response.data.message.Country_Name);
+        // console.log(response.data.message.College);
+      };
+      // console.log("hello world");
+      fetchdata();
+    } else {
+      navigate("/login");
+    }
     setsidebarpage(1);
-  }, []);
+  }, [username]);
+  // useEffect(() => {
+  //   const fetchdata = async () => {
+  //     const response = await axios.get(
+  //       `http://localhost:4000/auth/personalinfo/${username}`
+  //     );
+
+  //     setuserdetails({
+  //       email: response.data.message.email,
+  //       Country_Name: response.data.message.Country_Name,
+  //       College: response.data.message.College,
+  //     });
+  //     // console.log(response.data.message);
+  //     // console.log(response.data.message);
+  //     // console.log(response.data.message.Country_Name);
+  //     // console.log(response.data.message.College);
+  //   };
+  //   if (username != "username") fetchdata();
+  // }, [username]);
   return (
     <Box>
       <Box className="w-72 h-full">
@@ -96,7 +146,9 @@ function Userdetail() {
                 fontSize="small"
               />
               <Box className="flex">
-                <h6 className="text-white text-sm text-ellipsis">....</h6>
+                <h6 className="text-white text-sm text-ellipsis">
+                  {userdetails.email}
+                </h6>
               </Box>
             </Box>
             <Box className="flex flex-row  gap-2 p-2 rounded-xl ">
@@ -105,7 +157,9 @@ function Userdetail() {
                 fontSize="small"
               />
               <Box className="flex">
-                <h6 className="text-white text-sm text-ellipsis">...</h6>
+                <h6 className="text-white text-sm text-ellipsis">
+                  {userdetails.Country_Name}
+                </h6>
               </Box>
             </Box>
             <Box className="flex flex-row  gap-2 p-2 rounded-xl ">
@@ -116,7 +170,9 @@ function Userdetail() {
                 />
               </Box>
               <Box className="flex">
-                <h6 className="text-white text-sm text-wrap">...</h6>
+                <h6 className="text-white text-sm text-wrap">
+                  {userdetails.College}
+                </h6>
               </Box>
             </Box>
           </Box>
