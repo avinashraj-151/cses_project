@@ -24,11 +24,6 @@ function Profile() {
       // navigate(Login);
       navigate("/login");
     }
-    // if (user != null && username === "username" && user.username == null) {
-    //   navigate("/login");
-    // } else if (username === "username") {
-    //   setusername(user.username);
-    // }
   });
   return (
     <>

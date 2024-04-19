@@ -1,4 +1,4 @@
-import express from "express";
+import express, { Router } from "express";
 import User from "../Model/userModels.js";
 import bcrypt from "bcrypt";
 const Route = express.Router();
@@ -178,6 +178,32 @@ Route.post("/SocialInfo/:username", async (req, res, next) => {
   } catch (error) {
     // console.log(error);
     next(error);
+  }
+});
+
+Route.get("/SocialInfo/:username", async function (req, res, next) {
+  try {
+    const { username } = req.params;
+    const user = await User.findOne({ username: username });
+    // console.log(user);
+    res.json({ message: user });
+  } catch (e) {
+    res.json({ message: "Couldn't find" });
+    next(e);
+  }
+});
+
+Route.post("/logininfo/:username", async (req, res, next) => {
+  try {
+    const { username } = req.params;
+    console.log(username);
+    const userinfo = await User.findOne({
+      username: username,
+    });
+    res.json({ message: userinfo });
+  } catch (e) {
+    res.json({ message: e.message });
+    next(e);
   }
 });
 export default Route;

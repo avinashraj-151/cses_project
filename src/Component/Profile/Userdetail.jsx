@@ -19,6 +19,10 @@ function Userdetail() {
     email: "...",
     Country_Name: "...",
     College: "...",
+    github: "#",
+    linkedin: "#",
+    twitter: "#",
+    other: "#",
   });
   const navigate = useNavigate();
 
@@ -30,18 +34,19 @@ function Userdetail() {
         const response = await axios.get(
           `http://localhost:4000/auth/personalinfo/${user.username}`
         );
+        console.log(response);
         if (response) {
           setuserdetails({
             email: response.data.message.email,
             Country_Name: response.data.message.Country_Name,
             College: response.data.message.College,
+            github: response.data.message.Github,
+            linkedin: response.data.message.LinkedIn,
+            twitter: response.data.message.Twitter,
+            other: response.data.message.other,
           });
           setusername(user.username);
         }
-        // console.log(response.data.message);
-        // console.log(response.data.message);
-        // console.log(response.data.message.Country_Name);
-        // console.log(response.data.message.College);
       };
       // console.log("hello world");
       fetchdata();
@@ -50,24 +55,6 @@ function Userdetail() {
     }
     setsidebarpage(1);
   }, [username]);
-  // useEffect(() => {
-  //   const fetchdata = async () => {
-  //     const response = await axios.get(
-  //       `http://localhost:4000/auth/personalinfo/${username}`
-  //     );
-
-  //     setuserdetails({
-  //       email: response.data.message.email,
-  //       Country_Name: response.data.message.Country_Name,
-  //       College: response.data.message.College,
-  //     });
-  //     // console.log(response.data.message);
-  //     // console.log(response.data.message);
-  //     // console.log(response.data.message.Country_Name);
-  //     // console.log(response.data.message.College);
-  //   };
-  //   if (username != "username") fetchdata();
-  // }, [username]);
   return (
     <Box>
       <Box className="w-72 h-full">
@@ -92,42 +79,48 @@ function Userdetail() {
                 {username}
               </Typography>
               {/* username */}
-              <Typography className="text-sm text-gray-200">
-                user_real_name
-              </Typography>
+              <Typography className="text-sm text-gray-200">#name</Typography>
             </Box>
           </Box>
           <Box className="flex flex-row gap-4 justify-center items-center">
             <Box className="bg-[#111111] p-2 rounded-xl">
               <button>
-                <GitHubIcon
-                  className="text-white hover:scale-y-125 hover:scale-x-125"
-                  fontSize="medium"
-                />
+                <a target="_blank" href={userdetails.github}>
+                  <GitHubIcon
+                    className="text-white hover:scale-y-125 hover:scale-x-125"
+                    fontSize="medium"
+                  />
+                </a>
               </button>
             </Box>
             <Box className="bg-[#111111] p-2 rounded-xl">
               <button>
-                <LinkedInIcon
-                  className="text-white hover:scale-y-125 hover:scale-x-125"
-                  fontSize="medium"
-                />
+                <a target="_blank" href={userdetails.linkedin}>
+                  <LinkedInIcon
+                    className="text-white hover:scale-y-125 hover:scale-x-125"
+                    fontSize="medium"
+                  />
+                </a>
               </button>
             </Box>
             <Box className="bg-[#111111] p-2 rounded-xl">
               <button>
-                <XIcon
-                  className="text-white hover:scale-y-125 hover:scale-x-125"
-                  fontSize="medium"
-                />
+                <a target="_blank" href={userdetails.twitter}>
+                  <XIcon
+                    className="text-white hover:scale-y-125 hover:scale-x-125"
+                    fontSize="medium"
+                  />
+                </a>
               </button>
             </Box>
             <Box className="bg-[#111111] p-2 rounded-xl">
               <button>
-                <LanguageIcon
-                  className="text-white hover:scale-y-125 hover:scale-x-125"
-                  fontSize="medium"
-                />
+                <a target="_blank" href={userdetails.other}>
+                  <LanguageIcon
+                    className="text-white hover:scale-y-125 hover:scale-x-125"
+                    fontSize="medium"
+                  />
+                </a>
               </button>
             </Box>
           </Box>

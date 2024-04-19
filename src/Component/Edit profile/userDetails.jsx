@@ -55,9 +55,7 @@ function UserDetails({ clicked, selected }) {
               {username}
             </Typography>
             {/* username */}
-            <Typography className="text-sm text-gray-200">
-              user_real_name
-            </Typography>
+            <Typography className="text-sm text-gray-200">#name</Typography>
           </Box>
         </Box>
         <Box className="p-4 flex flex-col gap-4 text-white">

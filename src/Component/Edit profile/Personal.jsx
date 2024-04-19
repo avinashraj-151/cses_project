@@ -12,7 +12,6 @@ function Personal() {
   const [opensnack, setopensnack] = useState(false);
   const [snackmessage, setsnackmessage] = useState("");
   const [disabled, setdisabled] = useState(true);
-
   useEffect(() => {
     const fetchdata = async () => {
       const response = await axios.get(
