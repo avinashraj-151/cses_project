@@ -37,7 +37,9 @@ function SingleProblem({ loading, handelpickone }) {
         // console.log(res.data);
         handelpickone(res.data);
         loading(false);
-      } catch (err) {}
+      } catch (err) {
+        console.log(err);
+      }
     };
     fetch_data();
   }, [page]);

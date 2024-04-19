@@ -109,7 +109,9 @@ function Allproblem({ problemset_name }) {
         );
         setproblems(res.data);
         // console.log(res.data);
-      } catch (err) {}
+      } catch (err) {
+        console.log(err);
+      }
     };
     fetch_data();
   }, []);

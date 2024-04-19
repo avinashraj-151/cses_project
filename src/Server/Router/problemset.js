@@ -6,28 +6,31 @@ Route.get("/all", async (req, res, next) => {
   //   res.send("");
   try {
     const data = await Problemset.find({});
-    // res.json(data);
-    // console.log(data.length);
     res.json(data);
   } catch (err) {
-    // console.log(err);
+    console.log(err);
     next(err);
   }
 });
 
 Route.get("/:page", async (req, res, next) => {
-  const { page } = req.params;
-  // console.log(name);
-  // const data = await Problemset.find({ page: 1});
-  const data = await Problemset.find({ page: page });
-  // console.log(data);
-  res.json(data);
+  try {
+    const { page } = req.params;
+    const data = await Problemset.find({ page: page });
+    res.json(data);
+  } catch (err) {
+    console.log(err.message);
+    next(err);
+  }
 });
 Route.get("/singleproblem/:name", async (req, res, next) => {
-  const { name } = req.params;
-  // console.log(name);
-  const data = await Problemset.find({ problem_section: name });
-  // // console.log(data);
-  res.json(data);
+  try {
+    const { name } = req.params;
+    const data = await Problemset.find({ problem_section: name });
+    res.json(data);
+  } catch (error) {
+    console.log(error);
+    next(error);
+  }
 });
 export default Route;

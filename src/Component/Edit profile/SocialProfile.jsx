@@ -24,8 +24,9 @@ function SocialProfile() {
       SocialProfile_1
     );
     // console.log(featchdata.data.message);
+    if (featchdata.data.message) {
+    }
   }
-  // console.log(SocialProfile_1);
   return (
     <div>
       <Box>

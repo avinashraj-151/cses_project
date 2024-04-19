@@ -10,6 +10,10 @@ const problemSchema = new Schema({
     type: Boolean,
     default: false,
   },
+  note: {
+    type: String,
+    default: "",
+  },
 });
 const userSchema = new Schema({
   username: {

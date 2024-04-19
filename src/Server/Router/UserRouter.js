@@ -121,11 +121,62 @@ Route.get("/personalinfo/:username", async (req, res, next) => {
 Route.post("/SocialInfo/:username", async (req, res, next) => {
   try {
     const { username } = req.params;
-    // console.log(username);
-    console.log(req.body);
-
-    res.json({ message: userinfo });
+    const { other, twitter, linkedin, github } = req.body;
+    console.log(other, twitter, linkedin, github);
+    const user = await User.findOne({ username: username });
+    console.log(user);
+    if (github.length > 0) {
+      const user_github = await User.updateOne(
+        {
+          username: username,
+        },
+        {
+          $set: {
+            Github: github,
+          },
+        }
+      );
+      console.log(user_github);
+    }
+    if (twitter.length > 0) {
+      const user_twitter = await User.updateOne(
+        {
+          username: username,
+        },
+        {
+          $set: {
+            Twitter: twitter,
+          },
+        }
+      );
+    }
+    if (linkedin.length > 0) {
+      const user_linkedin = await User.updateOne(
+        {
+          username: username,
+        },
+        {
+          $set: {
+            LinkedIn: linkedin,
+          },
+        }
+      );
+    }
+    if (other.length > 0) {
+      const user_other = await User.updateOne(
+        {
+          username: username,
+        },
+        {
+          $set: {
+            Other: other,
+          },
+        }
+      );
+    }
+    res.json({ message: "updated" });
   } catch (error) {
+    // console.log(error);
     next(error);
   }
 });

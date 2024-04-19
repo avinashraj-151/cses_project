@@ -1,10 +1,21 @@
-import { useState } from "react";
+import { useState, useContext, useEffect } from "react";
 import { Box } from "@mui/material";
 import Accordion from "./Accordion";
+import { Context } from "../../Contextapi/Contextapi";
 const try_ = [
   1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
 ];
 function SavedNote() {
+  const { setusername, setsidebarpage } = useContext(Context);
+  useEffect(() => {
+    const user = JSON.parse(localStorage.getItem("userdetails"));
+    // console.log(user.username);
+    // console.log(user);
+    if (user != null) {
+      setusername(user.username);
+    }
+    setsidebarpage(4);
+  });
   return (
     <Box className="w-full h-full bg-[#1A1A1A] flex flex-col p-7">
       <Box>

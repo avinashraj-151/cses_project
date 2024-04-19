@@ -119,24 +119,28 @@ function WProblem() {
               <Box className="w-full h-full flex flex-col justify-between mt-4 mb-2">
                 <Skeleton
                   animation="pulse"
+                  variant="rounded"
                   sx={{
                     background: "linear-gradient(to right, #D65E64, #5E3D54)",
                   }}
                 ></Skeleton>
                 <Skeleton
                   animation="pulse"
+                  variant="rounded"
                   sx={{
                     background: "linear-gradient(to right, #D65E64, #5E3D54)",
                   }}
                 ></Skeleton>
                 <Skeleton
                   animation="pulse"
+                  variant="rounded"
                   sx={{
                     background: "linear-gradient(to right, #D65E64, #5E3D54)",
                   }}
                 ></Skeleton>
                 <Skeleton
                   animation="pulse"
+                  variant="rounded"
                   sx={{
                     background: "linear-gradient(to right, #D65E64, #5E3D54)",
                   }}
@@ -150,12 +154,14 @@ function WProblem() {
                 ></Skeleton>
                 <Skeleton
                   animation="pulse"
+                  variant="rounded"
                   sx={{
                     background: "linear-gradient(to right, #D65E64, #5E3D54)",
                   }}
                 ></Skeleton>
                 <Skeleton
                   animation="pulse"
+                  variant="rounded"
                   sx={{
                     background: "linear-gradient(to right, #D65E64, #5E3D54)",
                   }}

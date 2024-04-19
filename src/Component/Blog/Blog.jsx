@@ -1,27 +1,24 @@
-import { useEffect, useState } from "react";
-import { Box, Tabs, Tab, Typography } from "@mui/material";
-import Editor from "@monaco-editor/react";
-import DataObjectIcon from "@mui/icons-material/DataObject";
-import DescriptionOutlinedIcon from "@mui/icons-material/DescriptionOutlined";
-import AutoStoriesOutlinedIcon from "@mui/icons-material/AutoStoriesOutlined";
-import ScienceOutlinedIcon from "@mui/icons-material/ScienceOutlined";
-import TerminalOutlinedIcon from "@mui/icons-material/TerminalOutlined";
-import UpdateIcon from "@mui/icons-material/Update";
-import { Code } from "@mui/icons-material";
-
+import { useEffect, useState, useContext } from "react";
+import { Box } from "@mui/material";
+import { Context } from "../../Contextapi/Contextapi";
 export const Blog = () => {
-  const [value, setValue] = useState(0);
-  const [value1, setValue1] = useState(0);
-
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-  };
-  const handleChange1 = (event, newValue) => {
-    setValue1(newValue);
-  };
+  const { setusername, setsidebarpage } = useContext(Context);
+  useEffect(() => {
+    const user = JSON.parse(localStorage.getItem("userdetails"));
+    // console.log(user.username);
+    // console.log(user);
+    if (user != null) {
+      setusername(user.username);
+    }
+    setsidebarpage(3);
+  });
   return (
-    <Box className="w-full h-full flex-row gap-3 flex p-7 bg-red-600">
-      <Box className="w-1/2">
+    <Box className="w-full h-full flex-row gap-3 flex p-7 bg-red-600"></Box>
+  );
+};
+
+{
+  /* <Box className="w-1/2">
         <Box className="w-full h-full flex flex-col bg-green-600 rounded-xl">
           <Box className="bg-[#333333] rounded-t-lg">
             <Tabs
@@ -72,8 +69,10 @@ export const Blog = () => {
             </Tabs>
           </Box>
         </Box>
-      </Box>
-      <Box className="w-1/2">
+      </Box> */
+}
+{
+  /* <Box className="w-1/2">
         <Box className="w-full h-full bg-yellow-600 rounded-lg flex flex-col">
           <Box className="bg-[#333333] rounded-t-lg">
             <Tabs
@@ -106,8 +105,10 @@ export const Blog = () => {
               value === 0 ? "block" : "hidden"
             }`}
           >
-            {/* ... Editor Component */}
-            {/* {value === 0 && (
+            {/* ... Editor Component */
+}
+{
+  /* {value === 0 && (
               <Editor
                 className="rounded-lg"
                 theme="vs-dark"
@@ -115,10 +116,8 @@ export const Blog = () => {
                 defaultValue="//write some code"
                 options={{ minimap: { enabled: false } }}
               />
-            )} */}
+            )}
           </Box>
         </Box>
-      </Box>
-    </Box>
-  );
-};
+      </Box> */
+}
