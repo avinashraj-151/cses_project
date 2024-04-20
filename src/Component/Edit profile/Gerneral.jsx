@@ -1,7 +1,13 @@
-import React from "react";
+import { useState } from "react";
 import FileUploadIcon from "@mui/icons-material/FileUpload";
-import { Box, Divider, TextField } from "@mui/material";
+import { Box, Divider, TextField, Avatar } from "@mui/material";
 function Gerneral() {
+  const [urlimage, seturlimage] = useState("");
+  function handelchange(e) {
+    const objectURL = URL.createObjectURL(e.target.files[0]);
+    // console.log(objectURL);
+    seturlimage(objectURL);
+  }
   return (
     <div>
       <Box>
@@ -11,7 +17,7 @@ function Gerneral() {
         <Divider></Divider>
       </Box>
       <Box>
-        <Box>
+        <Box className="flex flex-row gap-5">
           <label for="fileInput">
             <Box className="w-80 mt-4 border-2 border-dashed justify-center items-center flex flex-col p-2 border-[#52525B] cursor-pointer text-[#9CA3AF] relative">
               <Box>
@@ -23,9 +29,30 @@ function Gerneral() {
                 </h1>
                 <p className="text-center">PNG, JPG or JPEG (Max. 1mb)</p>
               </Box>
-              <input id="fileInput" type="file" className="hidden"></input>
+              <input
+                id="fileInput"
+                type="file"
+                className="hidden"
+                onChange={handelchange}
+              ></input>
             </Box>
           </label>
+          <Box>
+            {urlimage.length > 0 && (
+              // <div className="mt-2">
+              //   <img
+              //     src={urlimage.length > 0 ? urlimage : ""}
+              //     alt="Uploaded"
+              //     style={{ maxHeight: "200px" }}
+              //   />
+              // </div>
+              <Avatar
+                src={urlimage.length > 0 ? urlimage : ""}
+                sx={{ width: 100, height: 100 }}
+                className="border-yellow-500 border-2 cursor-pointer"
+              ></Avatar>
+            )}
+          </Box>
         </Box>
         <Box className="flex flex-col gap-1 pt-3">
           <h3 className="text-white">Name</h3>

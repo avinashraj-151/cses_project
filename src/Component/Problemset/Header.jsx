@@ -1,59 +1,106 @@
-import React from "react";
+import { useContext } from "react";
 import { Box, Typography } from "@mui/material";
-import problemimage from "../../assert/intro3.png";
 import LinearProgress from "@mui/material/LinearProgress";
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import intro from "../../assert/introductionbadge.png";
+import sort_and_search from "../../assert/12.png";
+import Dynamic_pro from "../../assert/13.png";
+import graph_algo from "../../assert/14.png";
+import Range_query from "../../assert/15.png";
+import tree_algo from "../../assert/16.png";
+import math_algo from "../../assert/17.png";
+import string_algo from "../../assert/18.png";
+import Gemotry_algo from "../../assert/19.png";
+import advance_algo from "../../assert/20.png";
+import additional_algo from "../../assert/21.png";
+
+import { Context } from "./Contexapi";
+const problem_image = [
+  {
+    name: "Introductory Problems",
+    image: intro,
+  },
+  {
+    name: "Sorting And Searching",
+    image: sort_and_search,
+  },
+  {
+    name: "Dynamic Programming",
+    image: Dynamic_pro,
+  },
+  {
+    name: "Graph Algorithms",
+    image: graph_algo,
+  },
+  {
+    name: "Range Queries",
+    image: Range_query,
+  },
+  {
+    name: "Tree Algorithms",
+    image: tree_algo,
+  },
+  {
+    name: "Mathematics",
+    image: math_algo,
+  },
+  {
+    name: "String Algorithms",
+    image: string_algo,
+  },
+  {
+    name: "Geometry",
+    image: Gemotry_algo,
+  },
+  {
+    name: "Advanced Techniques",
+    image: advance_algo,
+  },
+  {
+    name: "Additional Problems",
+    image: additional_algo,
+  },
+];
 function Header({ problemset_name }) {
+  const image_of_badge = problem_image.find(
+    (problem) => problem.name === problemset_name
+  );
+  const { total_problem } = useContext(Context);
   return (
     <Box>
-      <Box className="flex justify-center items-center flex-row">
-        <Box>
-          <Box className=" flex flex-row gap-5 p-4 text-center justify-center items-center">
+      <Box className="flex justify-center items-center flex-row ">
+        <Box className="w-full h-full flex flex-col gap-5 p-4 text-center justify-center items-center">
+          <Box className="w-full h-full  flex flex-row justify-between items-center">
             <Box>
-              <img
-                src={problemimage}
-                className="w-28 h-28 animate-pulse cursor-pointer"
-              ></img>
+              <h1 className="text-white text-4xl capitalize font-bold">
+                {problemset_name}
+              </h1>
             </Box>
-            <Box>
-              <Box>
-                <h1 className="text-white text-4xl capitalize font-bold">
-                  {problemset_name}
-                </h1>
-              </Box>
-              <Box className="p-2 mt-8 flex flex-row justify-center">
+            <Box className="flex flex-row gap-2">
+              <Box className="p-2 mt-8 flex flex-col justify-center">
+                <Box>
+                  <Typography
+                    variant="body2"
+                    className="text-white text-center"
+                  >
+                    19/{total_problem} challenges Solved
+                  </Typography>
+                </Box>
                 <Box className="w-full m-1">
                   <LinearProgress
                     variant="determinate"
-                    value={20}
+                    value={100}
                     style={{
-                      height: 10,
+                      height: 12,
                       borderRadius: 5,
                       backgroundColor: "#152832",
                       padding: 1,
                     }}
                   />
                 </Box>
-                <Box>
-                  <Typography
-                    variant="body2"
-                    className="text-white text-center"
-                  >
-                    19/19
-                  </Typography>
-                </Box>
               </Box>
-              {/* <Box className="flex items-center">
-                <Box sx={{ width: "100%", mr: 1 }}>
-                  <LinearProgress variant="determinate" value={56} />
-                </Box>
-                <Box sx={{ minWidth: 35 }}>
-                  <Typography
-                    variant="body2"
-                    color="text.secondary"
-                  >{`${2}%`}</Typography>
-                </Box>
-              </Box> */}
+              <Box>
+                <img src={image_of_badge.image} className="w-40 h-40"></img>
+              </Box>
             </Box>
           </Box>
         </Box>

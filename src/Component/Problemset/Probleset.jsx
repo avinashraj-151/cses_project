@@ -3,24 +3,16 @@ import { Box } from "@mui/material";
 import Allproblem from "./Allproblem";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { Link } from "react-router-dom";
+import ContextProvider from "./Contexapi";
 function Probleset({ problemset_name }) {
-  // console.log(problemset_name);
   return (
     <>
-      <Box className="p-7 bg-[#1A1A1A] w-full h-full flex flex-col gap-6 overflow-auto scrollbar-thin">
-        <Box>
-          <Link to="/">
-            <button className="flex flex-row bg-[#343B3F]  text-white p-2 gap-3 rounded-lg">
-              <Box>
-                <ArrowBackIcon />
-              </Box>
-              <h4>back to home</h4>
-            </button>
-          </Link>
+      <ContextProvider>
+        <Box className="p-7 bg-[#1A1A1A] w-full h-full flex flex-col gap-6 overflow-auto scrollbar-thin">
+          <Header problemset_name={problemset_name}></Header>
+          <Allproblem problemset_name={problemset_name}></Allproblem>
         </Box>
-        <Header problemset_name={problemset_name}></Header>
-        <Allproblem problemset_name={problemset_name}></Allproblem>
-      </Box>
+      </ContextProvider>
     </>
   );
 }

@@ -38,7 +38,6 @@ function Home() {
               </Box>
             </Box>
           </Box>
-          {/* overflow-y-auto overflow-x-hidden mb-2 scrollbar-thin scrollbar-webkit */}
           <Box className=" ">
             <Card></Card>
           </Box>

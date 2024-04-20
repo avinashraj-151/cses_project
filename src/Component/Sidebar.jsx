@@ -29,24 +29,18 @@ const Menu_detail = [
     link: "/problems",
   },
   {
-    title: "Blog",
+    title: "store",
     icon: <CardTravelOutlinedIcon />,
-    link: "/blog",
+    link: "/store",
   },
   {
     title: "Saved Notes",
     icon: <BookOutlinedIcon />,
     link: "/savednotes",
   },
-  // {
-  //   title: "Login",
-  //   icon: <LogoutIcon />,
-  //   link: "/login",
-  // },
 ];
 function Sidebar() {
   const [open, setopen] = useState(false);
-  // const [Selected, setSelected] = useState(0);
   const { sidebarpage, username, login, profile1, setusername } =
     useContext(Context);
   function handellogout() {
@@ -148,7 +142,6 @@ function Sidebar() {
                   <span
                     className={`font-medium ${open === true ? "hidden" : ""}`}
                   >
-                    {/* {item.title} */}
                     Login
                   </span>
                 </div>
