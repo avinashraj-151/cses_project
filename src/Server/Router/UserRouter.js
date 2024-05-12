@@ -229,10 +229,8 @@ Route.post("/problemset/:username", async (req, res, next) => {
 Route.get("/problemset/:username", async (req, res, next) => {
   try {
     const { username } = req.params;
-    // console.log(username);
     if (username != null) {
       const userinfo = await User.findOne({ username: username });
-      // console.log(userinfo);
       res.json({ message: userinfo.problemset });
     } else {
       res.json({ message: "User not found" });
