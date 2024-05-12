@@ -4,13 +4,13 @@ const Schema = mongoose.Schema;
 const problemSchema = new Schema({
   problemId: {
     type: Schema.Types.ObjectId,
-    ref: "problemsets", // Assuming 'problemset' is the name of your other collection
-  },
-  solved: {
-    type: Boolean,
-    default: false,
+    ref: "problemsets",
   },
   note: {
+    type: String,
+    default: "",
+  },
+  problemsection: {
     type: String,
     default: "",
   },
@@ -77,6 +77,6 @@ const userSchema = new Schema({
   },
 });
 
-const Problem = mongoose.model("Problem", problemSchema);
+export const Problem = mongoose.model("Problem", problemSchema);
 const User = mongoose.model("User", userSchema);
 export default User;

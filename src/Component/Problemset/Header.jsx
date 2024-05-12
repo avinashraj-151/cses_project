@@ -13,14 +13,14 @@ import Gemotry_algo from "../../assert/19.png";
 import advance_algo from "../../assert/20.png";
 import additional_algo from "../../assert/21.png";
 
-import { Context } from "./Contexapi";
+import { Context1 } from "./Contexapi";
 const problem_image = [
   {
     name: "Introductory Problems",
     image: intro,
   },
   {
-    name: "Sorting And Searching",
+    name: "Sorting and Searching",
     image: sort_and_search,
   },
   {
@@ -61,10 +61,14 @@ const problem_image = [
   },
 ];
 function Header({ problemset_name }) {
+  // console.log(problemset_name);
   const image_of_badge = problem_image.find(
     (problem) => problem.name === problemset_name
   );
-  const { total_problem } = useContext(Context);
+  const { total_problem, challengesSolved, setchallengesSolved } =
+    useContext(Context1);
+  const precentage_solved = (challengesSolved / total_problem) * 100;
+  // console.log(precentage_solved);
   return (
     <Box>
       <Box className="flex justify-center items-center flex-row ">
@@ -82,13 +86,13 @@ function Header({ problemset_name }) {
                     variant="body2"
                     className="text-white text-center"
                   >
-                    19/{total_problem} challenges Solved
+                    {challengesSolved}/{total_problem} challenges Solved
                   </Typography>
                 </Box>
                 <Box className="w-full m-1">
                   <LinearProgress
                     variant="determinate"
-                    value={100}
+                    value={precentage_solved > 0 ? precentage_solved : 0}
                     style={{
                       height: 12,
                       borderRadius: 5,

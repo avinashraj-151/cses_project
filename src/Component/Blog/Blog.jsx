@@ -12,8 +12,6 @@ export const Blog = () => {
   const { setusername, setsidebarpage } = useContext(Context);
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem("userdetails"));
-    // console.log(user.username);
-    // console.log(user);
     if (user != null) {
       setusername(user.username);
     }
@@ -57,14 +55,14 @@ export const Blog = () => {
     },
   ];
   return (
-    <Box className="w-full h-full flex-row gap-3 flex p-7 bg-[#1A1A1A] overflow-auto scrollbar-thin">
+    <Box className="w-full h-full flex-row  flex p-7 bg-[#1A1A1A] overflow-auto scrollbar-thin">
       <Box className="flex flex-col">
         <Box className="grid grid-cols-3 gap-4">
           {tryone.map((item, index) => {
             return (
               <Box className="grid grid-cols-3 grid-flow-row">
-                <Box className="w-80 h-96 bg-white flex flex-col items-center justify-center p-3 rounded-xl cursor-pointer hover:shadow-lg hover:shadow-slate-400">
-                  <img src={item.image} className="w-70"></img>
+                <Box className="w-72 h-72 bg-white flex flex-col items-center justify-center p-3 rounded-xl cursor-pointer hover:shadow-lg hover:shadow-slate-400">
+                  <img src={item.image} className="w-52"></img>
                   <Box className="w-full h-full flex flex-row justify-between items-center">
                     <Box>
                       <h1 className="text-black text-center text-xl">

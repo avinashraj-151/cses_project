@@ -1,5 +1,5 @@
 import { useState, useContext, useEffect } from "react";
-import logo from "../assert/logo.png";
+import logo from "../assert/newlogo.png";
 import HomeIcon from "@mui/icons-material/Home";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 import ArrowLeftIcon from "@mui/icons-material/ArrowLeft";
@@ -9,9 +9,9 @@ import CardTravelOutlinedIcon from "@mui/icons-material/CardTravelOutlined";
 import { Avatar, Typography } from "@mui/material";
 import profile from "../assert/perfect.png";
 import LogoutIcon from "@mui/icons-material/Logout";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Context } from "../Contextapi/Contextapi.jsx";
-import { Login } from "@mui/icons-material";
+import { Login, NavigateBeforeTwoTone } from "@mui/icons-material";
 const Menu_detail = [
   {
     title: "Home",
@@ -43,10 +43,12 @@ function Sidebar() {
   const [open, setopen] = useState(false);
   const { sidebarpage, username, login, profile1, setusername } =
     useContext(Context);
+  const navigate = useNavigate();
   function handellogout() {
     localStorage.removeItem("userdetails");
     // setprofile1(false);
     setusername("username");
+    navigate("/login");
   }
   return (
     <div className="flex ">
@@ -58,7 +60,7 @@ function Sidebar() {
         >
           <div>
             <ArrowLeftIcon
-              className={` bg-white text-xl absolute -right-3 cursor-pointer top-9 borderrounded-full  border-[rgb(17,17,17)] ${
+              className={` bg-white text-xl absolute -right-3 cursor-pointer top-9 border rounded-full  border-[rgb(17,17,17)] ${
                 open === true ? "rotate-180" : ""
               }`}
               onClick={() => {

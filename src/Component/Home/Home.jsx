@@ -11,9 +11,11 @@ function Home() {
     const user = JSON.parse(localStorage.getItem("userdetails"));
     if (user != null) {
       setusername(user.username);
-      setsidebarpage(0);
     } else {
       navigate("/login");
+    }
+    if (username != "username") {
+      setsidebarpage(0);
     }
   }, []);
   return (

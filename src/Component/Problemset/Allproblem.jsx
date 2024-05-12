@@ -2,10 +2,14 @@ import { Box } from "@mui/material";
 import ProblemComponent from "./ProblemComponent";
 import { useState, useEffect, useContext } from "react";
 import axios from "axios";
-import { Context } from "./Contexapi";
+import { Context } from "../../Contextapi/Contextapi";
+import { Context1 } from "./Contexapi";
+
 function Allproblem({ problemset_name }) {
   const [problems, setproblems] = useState([]);
-  const { settotal_problem } = useContext(Context);
+  const { settotal_problem } = useContext(Context1);
+  const { username } = useContext(Context);
+  const [solvedproblem, setsolvedproblem] = useState([]);
   useEffect(() => {
     const fetch_data = async () => {
       try {
@@ -19,6 +23,17 @@ function Allproblem({ problemset_name }) {
       }
     };
     fetch_data();
+  }, []);
+  useEffect(() => {
+    const fetchdata = async () => {
+      const response = await axios.get(
+        `http://localhost:4000/auth/problemset/${username}`
+      );
+      if (response.data.message) {
+        setsolvedproblem(response.data.message);
+      }
+    };
+    fetchdata();
   }, []);
   return (
     <>
@@ -58,7 +73,8 @@ function Allproblem({ problemset_name }) {
               return (
                 <ProblemComponent
                   problem={problem}
-                  key={problemset_name}
+                  key={problem._id}
+                  solvedproblem={solvedproblem}
                 ></ProblemComponent>
               );
             })}

@@ -1,5 +1,6 @@
 import express, { Router } from "express";
 import User from "../Model/userModels.js";
+import { Problem } from "../Model/userModels.js";
 import bcrypt from "bcrypt";
 const Route = express.Router();
 Route.get("/signup/checkusername/:username", async (req, res, next) => {
@@ -206,4 +207,40 @@ Route.post("/logininfo/:username", async (req, res, next) => {
     next(e);
   }
 });
+
+Route.post("/problemset/:username", async (req, res, next) => {
+  try {
+    const { username } = req.params;
+    const problemdetails = req.body;
+    const created_problemdetails = await Problem.create({
+      problemId: problemdetails._id,
+      problemsection: problemdetails.problem_section,
+    });
+    const userinfo = await User.findOne({ username: username });
+    userinfo.problemset.push(created_problemdetails);
+    await userinfo.save();
+    res.json({ message: problemdetails });
+  } catch (e) {
+    res.json({ message: e.message });
+    next(e);
+  }
+});
+
+Route.get("/problemset/:username", async (req, res, next) => {
+  try {
+    const { username } = req.params;
+    // console.log(username);
+    if (username != null) {
+      const userinfo = await User.findOne({ username: username });
+      // console.log(userinfo);
+      res.json({ message: userinfo.problemset });
+    } else {
+      res.json({ message: "User not found" });
+    }
+  } catch (e) {
+    res.json({ message: e.message });
+    next(e);
+  }
+});
+
 export default Route;
